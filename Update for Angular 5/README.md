@@ -34,6 +34,32 @@ For the rest of the book, I have included project source code for each chapter. 
 
 2. The `Http` class has been deprecated and replaced with the new `HttpClient` class. The existing code from the examples will continue to work but the `Http` class will be removed in a future release.
 
+## Changes for Chapter 7
+
+If you're getting an error: 
+
+        ERROR in node_modules/rxjs/Observable.d.ts(1,15): error TS2307: Cannot find module
+        'rxjs-compat/Observable'.src/app/model/static.datasource.ts(3,10): error TS2305: Module 
+        '"C:/Users/USER_NAME/Desktop/SportsStore/node_modules/rxjs/Observable"' has no exported member 'Observable'.
+        rc/app/model/static.datasource.ts(25,8): error TS2304: Cannot find name 'from'.
+
+Check the `package.json` file for the dependencies you use. 
+
+
+        "rxjs": "^6.0.0",
+
+If you are using rxjs in version 6 then you need to change the import paths.
+
+Delete in the `static.datasource.ts` file: 
+
+        import { Observable } from "rxjs/Observable";
+        import "rxjs/add/observable/from";
+
+Add in the `static.datasource.ts` file:
+
+        import { Observable, from} from 'rxjs';
+
+
 ## Changes for Chapter 11
 
 Chapter 11 is now redundant since the process for creating a new Angular project is best achieved using angular-cli, which is demonstrated in the replacements for Chapters 2 and 7 in this update. This update also includes an Angular 5 version of the project created in Chapter 11, which is used in later chapters. 
